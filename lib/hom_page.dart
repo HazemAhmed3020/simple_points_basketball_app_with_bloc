@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'cubit/points_counter_cubit.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
 
   @override
   Widget build(BuildContext context) {
+    return BlocBuilder<PointsCounterCubit, PointsCounterState>(
+  builder: (context, state) {
     return Scaffold(
       appBar: AppBar(
         elevation: 3,
@@ -27,7 +32,7 @@ class Home extends StatelessWidget {
                   children: [
                     Text('Team A', style: TextStyle(fontSize: 45)),
                     Text(
-                      '0',
+                      '${BlocProvider.of<PointsCounterCubit>(context).teamApoints}',
                       style: TextStyle(
                         fontSize: 100,
                         fontWeight: FontWeight.bold,
@@ -36,7 +41,9 @@ class Home extends StatelessWidget {
                     Padding(
                       padding: EdgeInsetsGeometry.all(10.0),
                       child: ElevatedButton(
-                        onPressed: (){},
+                        onPressed: (){
+                          BlocProvider.of<PointsCounterCubit>(context).getPoints(team: 'A', buttonPoints: 1);
+                        },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.orange,
                           fixedSize: Size(200, 50),
@@ -55,7 +62,9 @@ class Home extends StatelessWidget {
                     Padding(
                       padding: EdgeInsetsGeometry.all(10.0),
                       child: ElevatedButton(
-                        onPressed: (){},
+                        onPressed: (){
+                          BlocProvider.of<PointsCounterCubit>(context).getPoints(team: 'A', buttonPoints: 2);
+                        },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.orange,
                           fixedSize: Size(200, 50),
@@ -74,7 +83,9 @@ class Home extends StatelessWidget {
                     Padding(
                       padding: EdgeInsetsGeometry.all(10.0),
                       child: ElevatedButton(
-                        onPressed: (){},
+                        onPressed: (){
+                          BlocProvider.of<PointsCounterCubit>(context).getPoints(team: 'A', buttonPoints: 3);
+                        },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.orange,
                           fixedSize: Size(200, 50),
@@ -102,12 +113,13 @@ class Home extends StatelessWidget {
                   indent: 30,
                 ),
               ),
+
               Expanded(
                 child: Column(
                   children: [
                     Text('Team B', style: TextStyle(fontSize: 45)),
                     Text(
-                      '00',
+                      '${BlocProvider.of<PointsCounterCubit>(context).teamBpoints}',
                       style: TextStyle(
                         fontSize: 100,
                         fontWeight: FontWeight.bold,
@@ -116,7 +128,10 @@ class Home extends StatelessWidget {
                     Padding(
                       padding: EdgeInsetsGeometry.all(10.0),
                       child: ElevatedButton(
-                        onPressed: (){},
+                        onPressed: (){
+                          BlocProvider.of<PointsCounterCubit>(context).getPoints(team: 'B', buttonPoints: 1);
+
+                        },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.orange,
                           fixedSize: Size(200, 50),
@@ -135,7 +150,9 @@ class Home extends StatelessWidget {
                     Padding(
                       padding: EdgeInsetsGeometry.all(10.0),
                       child: ElevatedButton(
-                        onPressed: (){},
+                        onPressed: (){
+                          BlocProvider.of<PointsCounterCubit>(context).getPoints(team: 'B', buttonPoints: 2);
+                        },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.orange,
                           fixedSize: Size(200, 50),
@@ -154,7 +171,9 @@ class Home extends StatelessWidget {
                     Padding(
                       padding: EdgeInsetsGeometry.all(10.0),
                       child: ElevatedButton(
-                        onPressed: (){},
+                        onPressed: (){
+                          BlocProvider.of<PointsCounterCubit>(context).getPoints(team: 'B', buttonPoints: 3);
+                        },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.orange,
                           fixedSize: Size(200, 50),
@@ -178,7 +197,10 @@ class Home extends StatelessWidget {
           Padding(
             padding: EdgeInsetsGeometry.all(10.0),
             child: ElevatedButton(
-              onPressed: (){},
+              onPressed: (){
+                BlocProvider.of<PointsCounterCubit>(context).getPoints(team: 'reset', buttonPoints: 0);
+
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.orange,
                 fixedSize: Size(200, 50),
@@ -188,7 +210,7 @@ class Home extends StatelessWidget {
                 ),
               ),
               child: Text(
-                'Reset',
+                'reset',
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Colors.black, fontSize: 25),
               ),
@@ -197,5 +219,7 @@ class Home extends StatelessWidget {
         ],
       ),
     );
+  },
+);
   }
 }
